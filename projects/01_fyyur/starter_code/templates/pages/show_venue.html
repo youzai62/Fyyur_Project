@@ -75,7 +75,24 @@
 	</div>
 </section>
 
-<a href="/venues/{{ venue.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
+<a href="/venues/{{ venue.id }}/edit" style="margin-right:30px;"><button class="btn btn-primary btn-lg">Edit</button></a>
+<button class="btn btn-danger btn-lg" id="{{ venue.id }}" onclick="removeVenue(this)">Delete</button></a>
 
+<script>
+function removeVenue(self){
+	console.log("event", self);
+	const venue_id = self.id;
+	fetch('/venues/' + venue_id, {
+		method: 'DELETE',
+		body: JSON.stringify({
+            'id': venue_id
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+	});
+	window.location.replace("../");
+}
+</script>
 {% endblock %}
 

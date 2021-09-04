@@ -72,7 +72,24 @@
 	</div>
 </section>
 
-<a href="/artists/{{ artist.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
+<a href="/artists/{{ artist.id }}/edit" style="margin-right:30px;"><button class="btn btn-primary btn-lg">Edit</button></a>
+<button class="btn btn-danger btn-lg" id="{{ artist.id }}" onclick="removeArtist(this)">Delete</button></a>
 
+<script>
+function removeArtist(self){
+	console.log("event", self);
+	const artist_id = self.id;
+	fetch('/artists/' + artist_id, {
+		method: 'DELETE',
+		body: JSON.stringify({
+            'id': artist_id
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+	});
+	window.location.replace("../");
+}
+</script>
 {% endblock %}
 
